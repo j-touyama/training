@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>更新画面</title>
+</head>
+<body>
+<form method="post" th:action="@{/admin/edit/update}" th:Object="${form}">
+<h1>社員情報画面</h1>
+<hr/>
+<h2>ログインユーザー</h2>
+<table>
+<tr><td>社員コード</td><td><input type="text" id="staff_code" name="staff_code" th:value="*{staff_code}"/></td></tr>
+<tr><td>姓：</td><td><input type="text" id="last_name" name="last_name" th:value="*{last_name}" /></td></tr>
+<tr><td>名：</td><td><input type="text" id="first_name" name="first_name" th:value="*{first_name}" /></td></tr>
+<tr><td>姓 ローマ字：</td><td><input type="text" id="last_name_romaji" name="last_name_romaji" th:value="*{last_name_romaji}"/></td></tr>
+<tr><td>名 ローマ字：</td><td><input type="text" id="first_name_romaji" name="first_name_romaji" th:value="*{first_name_romaji}"/></td></tr>
+<tr><td>所属：</td><td><input type="text" id="staff_department" name="staff_department" th:value="*{staff_department}"/></td></tr>
+<tr><td>属性：</td><td><input type="text" id="staff_attribute" name="staff_attribute" th:value="*{staff_attribute}"/></td></tr>
+<tr><td>案件：</td><td><input type="text" id="project_type" name="project_type" th:value="*{project_type}"/></td></tr>
+<tr><td>入社年月日：</td><td><input type="date" id="joined_year" name="joined_year" th:value="*{joined_year}"/></td></tr>
+<tr><td>新卒 中途：</td>
+<td>
+<input type="radio" id="new_career" value="0" name="carrer_type" th:checked="*{carrer_type == '0'}" /><label for="new_career">新卒</label>
+<input type="radio" id="mid_career" value="1" name="carrer_type" th:checked="*{carrer_type == '1'}" /><label for="mid_career">中途</label>
+</td></tr>
+</table>
+<input type="hidden" name="id" th:value="*{id}">
+<input type="submit" name="back" value="戻る	">
+<input type="submit" name="regist" value="更新">
+</form>
+</body>
+</html>

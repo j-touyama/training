@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>削除画面</title>
+</head>
+<body>
+<form method="post" th:action="@{/admin/edit/delete}" th:Object="${form}">
+<h1>社員情報画面</h1>
+<hr/>
+<h2>ログインユーザー</h2>
+<table>
+<tr><td>社員コード</td><td><input type="text" th:value="*{staff_code}" readonly/></td></tr>
+<tr><td>姓 名</td><td><input type="text" th:value="*{last_name} + ' ' + *{first_name}" readonly /></td></tr>
+<tr><td>姓 名 ローマ字</td><td><input type="text" th:value="*{last_name_romaji} + ' ' + *{first_name_romaji}" readonly /></td></tr>
+<tr><td>所属</td><td><input type="text" th:value="*{staff_department}" readonly/></td></tr>
+</table>
+<input type="hidden" name="id" th:value="*{id}">
+<input type="submit" name="back" value="戻る	">
+<input type="submit" name="regist" value="削除">
+</form>
+</body>
+</html>

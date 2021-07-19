@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<style type="text/css">
+table {
+	border-collapse: collapse;
+}
+table th, table td {
+	border: solid 1px;
+}
+</style>
+<meta charset="UTF-8">
+<title>社員一覧</title>
+</head>
+<body>
+<form method="post" th:action="@{/admin}">
+
+<h1>社員一覧</h1>
+<input type="submit" class="adminButton" value="管理画面へ" />
+<br/><br/>
+<h2>エンジニア</h2>
+<hr/><br/>
+<div th:include="employee/parts :: employeeTable(${member.engineer})"></div>
+
+<h2>営業</h2>
+<hr/><br/>
+<div th:include="employee/parts :: employeeTable(${member.sales})"></div>
+
+<h2>コーポレート</h2>
+<hr/><br/>
+<div th:include="employee/parts :: employeeTable(${member.corporate})"></div>
+
+</form>
+</body>
+</html>

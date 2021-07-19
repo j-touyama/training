@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<script type="text/javascript">
+function selectedId(val) {
+	document.getElementById("id").value = val;
+};
+</script>
+<meta charset="UTF-8">
+<style type="text/css">
+table {
+	border-collapse: collapse;
+}
+table th, table td {
+	border: solid 1px;
+}
+</style>
+<title>管理者画面</title>
+</head>
+<body>
+<form method="post" th:action="@{/admin/edit}" th:Object="${form}">
+<h1>管理画面</h1>
+<input type="submit" th:value="新規登録" name="insert" />
+<hr/>
+<h2>ログインユーザー</h2>
+<div th:unless="${registComment == ''}" th:value="registComment"></div>
+<table>
+<tr>
+	<th>id</th><th>社員コード</th><th>姓名</th><th>姓 名 ローマ字</th><th>編集</th><th>削除</th>
+</tr>
+<tr th:each="member : ${members}" style="list-style: none;">
+	<td>
+	<span th:text="${member.id}">1</span>
+		<input type="hidden" th:id="'id_' + ${member.id}" th:value="${member.id}" />
+	</td>
+	<td><span th:text="${member.staff_code}">0001</span></td>
+	<td><span th:text="${member.last_name} + ' ' + ${member.first_name}">山田太郎</span></td>
+	<td><span th:text="${member.last_name_romaji} + ' ' + ${member.first_name_romaji}">yamada taro</span></td>
+	<td>
+		<input type="submit" th:value="編集" name="update" th:attr="onclick='selectedId(document.getElementById(\'id_' + ${member.id} + '\').value);'" />
+	</td>
+	<td>
+		<input type="submit" th:value="削除" name="delete"  th:attr="onclick='selectedId(document.getElementById(\'id_' + ${member.id} + '\').value);'" />
+	</td>
+</tr>
+</table>
+<input type="hidden" name="id" id="id" />
+<p><input type="submit" th:value="戻る" name="back" /></p>
+
+</form>
+</body>
+</html>

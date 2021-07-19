@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="css/common.css">
+<meta charset="UTF-8">
+<title>社員一覧表</title>
+</head>
+<body>
+<div th:fragment="employeeTable(members)">
+<table>
+<tr>
+	<th>No</th><th>氏名</th><th>入社年</th><th>キャリア</th>
+</tr>
+<tr th:each="member, index : ${members}" style="list-style: none;">
+	<td th:text="${index.count}">1</td>
+	<td th:text="${member.last_name} + ${member.first_name}">山田太郎</td>
+	<td th:text="${member.joined_year}">2000-01-01</td>
+	<td th:if="${member.carrer_type == '0'}" th:text="新卒">新卒</td>
+	<td th:unless="${member.carrer_type == '0'}" th:text="中途">中途</td>
+</tr>
+</table>
+</div>
+</body>
+</html>
