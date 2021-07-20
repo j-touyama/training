@@ -3,7 +3,6 @@ package com.example.demo.employee.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.employee.domain.form.UserForm;
@@ -15,12 +14,6 @@ public class AdminEditController {
 	@Autowired
 	private UserService service;
 
-	@GetMapping("admin/edit")
-	public String getAdmin() {
-
-		return "redirect:/admin";
-	}
-
 	@PostMapping(value="admin/edit/insert", params="regist")
 	public String postAdminInsertRegist(UserForm form, Model model) {
 		try {
@@ -29,7 +22,7 @@ public class AdminEditController {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-		return "forward:/admin";
+		return "/admin/result";
 	}
 
 	@PostMapping(value="admin/edit/update", params="regist")
@@ -40,7 +33,7 @@ public class AdminEditController {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-		return "forward:/admin";
+		return "/admin/result";
 	}
 
 	@PostMapping(value="admin/edit/delete", params="regist")
@@ -51,7 +44,7 @@ public class AdminEditController {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-		return "forward:/admin";
+		return "/admin/result";
 	}
 
 	@PostMapping(value={"admin/edit/insert", "admin/edit/update", "admin/edit/delete"}, params="back")
