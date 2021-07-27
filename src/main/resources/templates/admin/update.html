@@ -2,6 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<style type="text/css">
+.error {
+	border: 2px solid red;
+}
+</style>
 <title>更新画面</title>
 </head>
 <body>
@@ -10,19 +15,48 @@
 <hr/>
 <h2>ログインユーザー</h2>
 <table>
-<tr><td>社員コード</td><td><input type="text" id="staff_code" name="staff_code" th:value="*{staff_code}"/></td></tr>
-<tr><td>姓：</td><td><input type="text" id="last_name" name="last_name" th:value="*{last_name}" /></td></tr>
-<tr><td>名：</td><td><input type="text" id="first_name" name="first_name" th:value="*{first_name}" /></td></tr>
-<tr><td>姓 ローマ字：</td><td><input type="text" id="last_name_romaji" name="last_name_romaji" th:value="*{last_name_romaji}"/></td></tr>
-<tr><td>名 ローマ字：</td><td><input type="text" id="first_name_romaji" name="first_name_romaji" th:value="*{first_name_romaji}"/></td></tr>
-<tr><td>所属：</td><td><input type="text" id="staff_department" name="staff_department" th:value="*{staff_department}"/></td></tr>
-<tr><td>属性：</td><td><input type="text" id="staff_attribute" name="staff_attribute" th:value="*{staff_attribute}"/></td></tr>
+<tr><td>社員コード</td>
+<td>
+<input type="text" id="staff_code" name="staff_code" th:value="*{staff_code}" th:classappend="${#fields.hasErrors('staff_code')} ? 'error'"/>
+<span th:if="${#fields.hasErrors('staff_code')}" th:errors="*{staff_code}" style="color:red;">error</span>
+</td></tr>
+<tr><td>姓：</td>
+<td>
+<input type="text" id="last_name" name="last_name" th:value="*{last_name}" th:classappend="${#fields.hasErrors('last_name')} ? 'error'"/>
+<span th:if="${#fields.hasErrors('last_name')}" th:errors="*{last_name}" style="color:red;">error</span>
+</td></tr>
+<tr><td>名：</td>
+<td>
+<input type="text" id="first_name" name="first_name" th:value="*{first_name}" th:classappend="${#fields.hasErrors('first_name')} ? 'error'"/>
+<span th:if="${#fields.hasErrors('first_name')}" th:errors="*{first_name}" style="color:red;">error</span>
+</td></tr>
+<tr><td>姓 ローマ字：</td>
+<td>
+<input type="text" id="last_name_romaji" name="last_name_romaji" th:value="*{last_name_romaji}" th:classappend="${#fields.hasErrors('last_name_romaji')} ? 'error'"/>
+<span th:if="${#fields.hasErrors('last_name_romaji')}" th:errors="*{last_name_romaji}" style="color:red;">error</span>
+</td></tr>
+<tr><td>名 ローマ字：</td>
+<td>
+<input type="text" id="first_name_romaji" name="first_name_romaji" th:value="*{first_name_romaji}" th:classappend="${#fields.hasErrors('first_name_romaji')} ? 'error'"/>
+<span th:if="${#fields.hasErrors('first_name_romaji')}" th:errors="*{first_name_romaji}" style="color:red;">error</span>
+</td></tr>
+<tr><td>所属：</td>
+<td>
+<input type="text" id="staff_department" name="staff_department" th:value="*{staff_department}" th:classappend="${#fields.hasErrors('staff_department')} ? 'error'"/>
+<span th:if="${#fields.hasErrors('staff_department')}" th:errors="*{staff_department}" style="color:red;">error</span>
+</td></tr>
+<tr><td>属性：</td><td><input type="text" id="staff_attribute" name="staff_attribute" th:value="*{staff_attribute}" /></td></tr>
 <tr><td>案件：</td><td><input type="text" id="project_type" name="project_type" th:value="*{project_type}"/></td></tr>
-<tr><td>入社年月日：</td><td><input type="date" id="joined_year" name="joined_year" th:value="*{joined_year}"/></td></tr>
+<tr><td>入社年月日：</td>
+<td>
+<input type="text" id="joined_year" name="joined_year" th:value="*{joined_year}" placeholder="yyyy/MM/dd" th:classappend="${#fields.hasErrors('joined_year')} ? 'error'"/>
+<span th:if="${#fields.hasErrors('joined_year')}" th:errors="*{joined_year}" style="color:red;">error</span>
+</td></tr>
 <tr><td>新卒 中途：</td>
 <td>
-<input type="radio" id="new_career" value="0" name="carrer_type" th:checked="*{carrer_type == '0'}" /><label for="new_career">新卒</label>
-<input type="radio" id="mid_career" value="1" name="carrer_type" th:checked="*{carrer_type == '1'}" /><label for="mid_career">中途</label>
+<input type="radio" value="0" id="new_career" name="carrer_type" th:checked="*{carrer_type == '0'}" /><label for="new_career">新卒</label>
+<input type="radio" value="1" id="mid_career" name="carrer_type" th:checked="*{carrer_type == '1'}" /><label for="mid_career">中途</label>
+<span th:if="${#fields.hasErrors('carrer_type')}" th:errors="*{carrer_type}" style="color:red;">error</span>
 </td></tr>
 </table>
 <input type="hidden" name="id" th:value="*{id}">

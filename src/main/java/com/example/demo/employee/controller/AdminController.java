@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.employee.domain.form.UserForm;
 import com.example.demo.employee.domain.model.User;
 import com.example.demo.employee.domain.service.UserService;
 
@@ -46,7 +48,7 @@ public class AdminController {
 	}
 
 	@PostMapping(value="admin/edit", params="insert")
-	public String postAdminInsert(Model model) {
+	public String postAdminInsert(@ModelAttribute("form") UserForm form, Model model) {
 		return "/admin/insert";
 	}
 

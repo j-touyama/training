@@ -1,7 +1,5 @@
 package com.example.demo.employee.domain.model;
 
-import java.util.Date;
-
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,12 +15,8 @@ public class User {
 	private String staff_department;
 	private String staff_attribute;
 	private String project_type;
-	private Date joined_year;
+	private String joined_year;
 	private String carrer_type;
-	private String login_id;
-	private String login_pw;
-	private boolean login_flg;
-	private String auth_code;
 
 	public long getId() {
 		return id;
@@ -84,10 +78,10 @@ public class User {
 	public void setProject_type(String project_type) {
 		this.project_type = project_type;
 	}
-	public Date getJoined_year() {
+	public String getJoined_year() {
 		return joined_year;
 	}
-	public void setJoined_year(Date joined_year) {
+	public void setJoined_year(String joined_year) {
 		this.joined_year = joined_year;
 	}
 	public String getCarrer_type() {
@@ -95,30 +89,6 @@ public class User {
 	}
 	public void setCarrer_type(String carrer_type) {
 		this.carrer_type = carrer_type;
-	}
-	public String getLogin_id() {
-		return login_id;
-	}
-	public void setLogin_id(String login_id) {
-		this.login_id = login_id;
-	}
-	public String getLogin_pw() {
-		return login_pw;
-	}
-	public void setLogin_pw(String login_pw) {
-		this.login_pw = login_pw;
-	}
-	public boolean isLogin_flg() {
-		return login_flg;
-	}
-	public void setLogin_flg(boolean login_flg) {
-		this.login_flg = login_flg;
-	}
-	public String getAuth_code() {
-		return auth_code;
-	}
-	public void setAuth_code(String auth_code) {
-		this.auth_code = auth_code;
 	}
 
 }

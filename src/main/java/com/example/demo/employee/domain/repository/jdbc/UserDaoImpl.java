@@ -1,7 +1,6 @@
 package com.example.demo.employee.domain.repository.jdbc;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -124,7 +123,7 @@ public class UserDaoImpl implements UserDao {
 		user.setStaff_department((String)map.get("staff_department"));
 		user.setStaff_attribute((String)map.get("staff_attribute"));
 		user.setProject_type((String)map.get("project_type"));
-		user.setJoined_year((Date)map.get("joined_year"));
+		user.setJoined_year((String)map.get("joined_year"));
 		user.setCarrer_type((String)map.get("carrer_type"));
 		return user;
 	}

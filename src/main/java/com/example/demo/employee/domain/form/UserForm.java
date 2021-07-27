@@ -1,22 +1,43 @@
 package com.example.demo.employee.domain.form;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
+
+import com.example.demo.employee.domain.model.ValidGroup1;
+import com.example.demo.employee.domain.model.ValidGroup2;
+import com.example.demo.employee.domain.model.ValidGroup3;
 
 public class UserForm {
 
 	private String id;
+	@NotEmpty(groups={ValidGroup1.class},message="社員コードを入力してください。")
+	@Pattern(regexp = "^[0-9]*$", groups={ValidGroup2.class},message="数値で入力してください。")
+	@Length(max=4, groups={ValidGroup3.class},message="4文字以下で入力してください。")
 	private String staff_code;
+	@NotEmpty(groups={ValidGroup1.class},message="姓を入力してください。")
 	private String last_name;
+	@NotEmpty(groups={ValidGroup1.class},message="名を入力してください。")
 	private String first_name;
+	@NotEmpty(groups={ValidGroup1.class},message="姓(ローマ字)を入力してください。")
+	@Pattern(regexp = "^[a-zA-Z0-9]*$", groups={ValidGroup2.class},message="半角英数字で入力してください。")
 	private String last_name_romaji;
+	@NotEmpty(groups={ValidGroup1.class},message="名(ローマ字)を入力してください。")
+	@Pattern(regexp = "^[a-zA-Z0-9]*$", groups={ValidGroup2.class},message="半角英数字で入力してください。")
 	private String first_name_romaji;
 	private String staff_photo_url;
+	@NotEmpty(groups={ValidGroup1.class},message="部署コードを入力してください。")
+	@Pattern(regexp = "^[0-9]*$", groups={ValidGroup2.class},message="数値で入力してください。")
+	@Range(max=4, groups={ValidGroup3.class},message="4文字以下で入力してください。")
 	private String staff_department;
 	private String staff_attribute;
 	private String project_type;
-	private Date joined_year;
+	@NotEmpty(groups={ValidGroup1.class}, message="日付を入力してください。")
+	@Pattern(regexp = "^[0-9]{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$", groups={ValidGroup2.class},message="yyyy/MM/dd形式で入力してください。")
+	private String joined_year;
+	@NotEmpty(groups={ValidGroup1.class},message="経歴を選択してください。")
 	private String carrer_type;
 
 	public String getId() {
@@ -79,20 +100,11 @@ public class UserForm {
 	public void setProject_type(String project_type) {
 		this.project_type = project_type;
 	}
-	public Date getJoined_year() {
+	public String getJoined_year() {
 		return joined_year;
 	}
 	public void setJoined_year(String joined_year) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = new Date();
-		try {
-			date = dateFormat.parse(joined_year);
-		} catch (ParseException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-			this.joined_year = null;
-		}
-		this.joined_year = date;
+		this.joined_year = joined_year;
 	}
 	public String getCarrer_type() {
 		return carrer_type;
