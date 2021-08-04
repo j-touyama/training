@@ -1,10 +1,12 @@
 package com.example.demo.employee.domain.form;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.Range;
 
 import com.example.demo.employee.domain.model.ValidGroup1;
 import com.example.demo.employee.domain.model.ValidGroup2;
@@ -28,17 +30,22 @@ public class UserForm {
 	@Pattern(regexp = "^[a-zA-Z0-9]*$", groups={ValidGroup2.class},message="半角英数字で入力してください。")
 	private String first_name_romaji;
 	private String staff_photo_url;
-	@NotEmpty(groups={ValidGroup1.class},message="部署コードを入力してください。")
-	@Pattern(regexp = "^[0-9]*$", groups={ValidGroup2.class},message="数値で入力してください。")
-	@Range(max=4, groups={ValidGroup3.class},message="4文字以下で入力してください。")
+	@NotEmpty(groups={ValidGroup1.class},message="部署コードを選択してください。")
 	private String staff_department;
-	private String staff_attribute;
 	private String project_type;
 	@NotEmpty(groups={ValidGroup1.class}, message="日付を入力してください。")
 	@Pattern(regexp = "^[0-9]{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$", groups={ValidGroup2.class},message="yyyy/MM/dd形式で入力してください。")
 	private String joined_year;
 	@NotEmpty(groups={ValidGroup1.class},message="経歴を選択してください。")
 	private String carrer_type;
+
+	private Map<String, String> departmentMap = new LinkedHashMap<>();
+	
+	public UserForm() {
+		departmentMap.put("0001", "エンジニア");
+		departmentMap.put("0002", "営業");
+		departmentMap.put("0003", "コーポレート");
+	}
 
 	public String getId() {
 		return id;
@@ -88,12 +95,6 @@ public class UserForm {
 	public void setStaff_department(String staff_department) {
 		this.staff_department = staff_department;
 	}
-	public String getStaff_attribute() {
-		return staff_attribute;
-	}
-	public void setStaff_attribute(String staff_attribute) {
-		this.staff_attribute = staff_attribute;
-	}
 	public String getProject_type() {
 		return project_type;
 	}
@@ -111,5 +112,8 @@ public class UserForm {
 	}
 	public void setCarrer_type(String carrer_type) {
 		this.carrer_type = carrer_type;
+	}
+	public Map<String, String> getDepartmentMap() {
+		return departmentMap;
 	}
 }

@@ -49,6 +49,7 @@ public class AdminController {
 
 	@PostMapping(value="admin/edit", params="insert")
 	public String postAdminInsert(@ModelAttribute("form") UserForm form, Model model) {
+
 		return "/admin/insert";
 	}
 

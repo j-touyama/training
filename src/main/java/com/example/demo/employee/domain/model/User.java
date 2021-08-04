@@ -1,5 +1,8 @@
 package com.example.demo.employee.domain.model;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,12 +14,17 @@ public class User {
 	private String first_name;
 	private String last_name_romaji;
 	private String first_name_romaji;
-	private String staff_photo_url;
 	private String staff_department;
-	private String staff_attribute;
 	private String project_type;
 	private String joined_year;
 	private String carrer_type;
+	private Map<String, String> departmentMap = new LinkedHashMap<>();
+	
+	public User() {
+		departmentMap.put("0001", "エンジニア");
+		departmentMap.put("0002", "営業");
+		departmentMap.put("0003", "コーポレート");
+	}
 
 	public long getId() {
 		return id;
@@ -54,23 +62,11 @@ public class User {
 	public void setFirst_name_romaji(String first_name_romaji) {
 		this.first_name_romaji = first_name_romaji;
 	}
-	public String getStaff_photo_url() {
-		return staff_photo_url;
-	}
-	public void setStaff_photo_url(String staff_photo_url) {
-		this.staff_photo_url = staff_photo_url;
-	}
 	public String getStaff_department() {
 		return staff_department;
 	}
 	public void setStaff_department(String staff_department) {
 		this.staff_department = staff_department;
-	}
-	public String getStaff_attribute() {
-		return staff_attribute;
-	}
-	public void setStaff_attribute(String staff_attribute) {
-		this.staff_attribute = staff_attribute;
 	}
 	public String getProject_type() {
 		return project_type;
@@ -91,4 +87,7 @@ public class User {
 		this.carrer_type = carrer_type;
 	}
 
+	public Map<String, String> getDepartmentMap() {
+		return departmentMap;
+	}
 }

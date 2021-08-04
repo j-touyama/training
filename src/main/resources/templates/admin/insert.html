@@ -43,10 +43,12 @@
 </td></tr>
 <tr><td>所属：</td>
 <td>
-<input type="text" id="staff_department" name="staff_department" th:value="*{staff_department}" th:classappend="${#fields.hasErrors('staff_department')} ? 'error'"/>
+<select name="staff_department" th:classappend="${#fields.hasErrors('staff_department')} ? 'error'">
+<option value="">------------------</option>
+<option th:each="item : *{departmentMap}" th:value="${item.key}" th:text="${item.value}" th:selected="${item.key} == *{staff_department}" >部署名</option>
+</select>
 <span th:if="${#fields.hasErrors('staff_department')}" th:errors="*{staff_department}" style="color:red;">error</span>
 </td></tr>
-<tr><td>属性：</td><td><input type="text" id="staff_attribute" name="staff_attribute" th:value="*{staff_attribute}" /></td></tr>
 <tr><td>案件：</td><td><input type="text" id="project_type" name="project_type" th:value="*{project_type}"/></td></tr>
 <tr><td>入社年月日：</td>
 <td>
