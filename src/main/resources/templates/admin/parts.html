@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="css/common.css">
+<meta charset="UTF-8">
+<title>社員一覧表</title>
+</head>
+<body>
+<div th:fragment="employeeInfo(name, isReadonly)">
+<h1>社員情報<span th:text=${name}>新規登録</span>画面</h1>
+<hr/>
+<h2>社員情報</h2>
+<hr/>
+(<span id="require">※</span>)がついている項目は入力必須です。
+<table class="edit">
+<tr><td id="title">社員コード(<span id="require">※</span>)：</td>
+<td>
+<input type="text" id="staff_code" name="staff_code" th:value="*{staff_code}" th:readonly="${isReadonly}" th:classappend="${#fields.hasErrors('staff_code')} ? 'error'"/>
+<span th:if="${#fields.hasErrors('staff_code')}" th:errors="*{staff_code}" style="color:red;">error</span>
+</td></tr>
+<tr><td id="title">姓(<span id="require">※</span>)：</td>
+<td>
+<input type="text" id="last_name" name="last_name" th:value="*{last_name}" th:readonly="${isReadonly}" th:classappend="${#fields.hasErrors('last_name')} ? 'error'"/>
+<span th:if="${#fields.hasErrors('last_name')}" th:errors="*{last_name}" style="color:red;">error</span>
+</td></tr>
+<tr><td id="title">名(<span id="require">※</span>)：</td>
+<td>
+<input type="text" id="first_name" name="first_name" th:value="*{first_name}" th:readonly="${isReadonly}" th:classappend="${#fields.hasErrors('first_name')} ? 'error'"/>
+<span th:if="${#fields.hasErrors('first_name')}" th:errors="*{first_name}" style="color:red;">error</span>
+</td></tr>
+<tr><td id="title">姓 ローマ字(<span id="require">※</span>)：</td>
+<td>
+<input type="text" id="last_name_romaji" name="last_name_romaji" th:value="*{last_name_romaji}" th:readonly="${isReadonly}" th:classappend="${#fields.hasErrors('last_name_romaji')} ? 'error'"/>
+<span th:if="${#fields.hasErrors('last_name_romaji')}" th:errors="*{last_name_romaji}" style="color:red;">error</span>
+</td></tr>
+<tr><td id="title">名 ローマ字(<span id="require">※</span>)：</td>
+<td>
+<input type="text" id="first_name_romaji" name="first_name_romaji" th:value="*{first_name_romaji}" th:readonly="${isReadonly}" th:classappend="${#fields.hasErrors('first_name_romaji')} ? 'error'"/>
+<span th:if="${#fields.hasErrors('first_name_romaji')}" th:errors="*{first_name_romaji}" style="color:red;">error</span>
+</td></tr>
+<tr><td id="title">所属(<span id="require">※</span>)：</td>
+<td>
+<div th:if="${isReadonly}">
+<select name="staff_department" th:classappend="${#fields.hasErrors('staff_department')} ? 'error'">
+<option th:text="*{departmentMap.get(staff_department)}" th:value="*{staff_department}" />
+</select>
+</div>
+<div th:unless="${isReadonly}">
+<select name="staff_department" th:classappend="${#fields.hasErrors('staff_department')} ? 'error'">
+<option value="">------------------</option>
+<option th:each="item : *{departmentMap}" th:value="${item.key}" th:text="${item.value}" th:selected="${item.key} == *{staff_department}" >部署名</option>
+</select>
+</div>
+<span th:if="${#fields.hasErrors('staff_department')}" th:errors="*{staff_department}" style="color:red;">error</span>
+</td></tr>
+<tr><td id="title">入社年月日(<span id="require">※</span>)：</td>
+<td>
+<input type="text" id="joined_year" name="joined_year" th:value="*{joined_year}" th:readonly="${isReadonly}" placeholder="yyyy/MM/dd" th:classappend="${#fields.hasErrors('joined_year')} ? 'error'"/>
+<span th:if="${#fields.hasErrors('joined_year')}" th:errors="*{joined_year}" style="color:red;">error</span>
+</td></tr>
+<tr><td id="title">経歴(<span id="require">※</span>)：</td>
+<td>
+<div th:if="${isReadonly}">
+<input type="radio" value="0" id="new_career" name="new_glad_flg" th:checked="*{new_glad_flg}" th:disabled="*{!new_glad_flg}"/><label for="new_career">新卒</label>
+<input type="radio" value="1" id="mid_career" name="new_glad_flg" th:checked="*{!new_glad_flg}" th:disabled="*{new_glad_flg}"/><label for="mid_career">中途</label>
+</div>
+<div th:unless="${isReadonly}">
+<input type="radio" value=true id="new_career" name="new_glad_flg" th:checked="*{new_glad_flg}" /><label for="new_career">新卒</label>
+<input type="radio" value=false id="mid_career" name="new_glad_flg" th:checked="*{!new_glad_flg}" /><label for="mid_career">中途</label>
+</div>
+<span th:if="${#fields.hasErrors('new_glad_flg')}" th:errors="*{new_glad_flg}" style="color:red;">error</span>
+</td></tr>
+<tr><td id="title">案件概要／業務内容：</td>
+<td>
+<div th:if="${isReadonly}"><textarea name="project_type" th:utext="*{project_type}" readonly></textarea></div>
+<div th:unless="${isReadonly}"><textarea name="project_type" th:utext="*{project_type}"></textarea></div>
+</td>
+</tr>
+</table>
+<input type="hidden" name="id" th:value="*{id}">
+<br/>
+<input type="submit" name="back" value="戻る	">
+<input type="submit" name="regist" th:value="${name}">
+</div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.example.demo.employee.domain.repository.jdbc;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import com.example.demo.employee.domain.form.UserForm;
 import com.example.demo.employee.domain.model.User;
@@ -17,6 +19,8 @@ public class UserDaoImpl implements UserDao {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
+
+	private static final String USER_NAME = "user";
 
 	@Override
 	public List<User> selectedDpt(String deptCd) {
@@ -62,10 +66,15 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int insertUser(UserForm form) throws Exception {
-		String sql = 
-				"INSERT INTO staffs (staff_code, last_name, first_name, last_name_romaji, first_name_romaji,"
-				+ " staff_department, project_type, joined_year, carrer_type)"
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		Timestamp nowTime = getNowTime();
+		String projectType = form.getProject_type();
+		// 改行コードは<br>要素に変換して登録する。
+		if(projectType != null && !projectType.isEmpty())
+			projectType = projectType.replaceAll("\r\n", "<br>");
+
+		String sql = "INSERT INTO staffs (staff_code, last_name, first_name, last_name_romaji, first_name_romaji,"
+				+ " staff_department, project_type, joined_year, new_glad_flg, created_by, updated_by, created_at, updated_at)"
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int result = jdbcTemplate.update(sql,
 				form.getStaff_code(),
 				form.getLast_name(),
@@ -73,18 +82,28 @@ public class UserDaoImpl implements UserDao {
 				form.getLast_name_romaji(),
 				form.getFirst_name_romaji(),
 				form.getStaff_department(),
-				form.getProject_type(),
+				projectType,
 				form.getJoined_year(),
-				form.getCarrer_type()
+				form.isNew_glad_flg(),
+				USER_NAME,
+				USER_NAME,
+				nowTime,
+				nowTime
 				);
 		return result;
 	}
 
 	@Override
 	public int updateUser(UserForm form) throws Exception {
+		Timestamp nowTime = getNowTime();
+		String projectType = form.getProject_type();
+		// 改行コードは<br>要素に変換して登録する。
+		if(projectType != null && !projectType.isEmpty())
+			projectType = projectType.replaceAll("\r\n", "<br>");
 		String sql = "UPDATE staffs SET staff_code = ?, last_name = ?, first_name = ?,"
 				+ " last_name_romaji = ?, first_name_romaji = ?, staff_department = ?,"
-				+ " project_type = ?, joined_year = ?, carrer_type = ?"
+				+ " project_type = ?, joined_year = ?, new_glad_flg = ?,"
+				+ " updated_by = ?, updated_at = ?"
 				+ " WHERE id = ?";
 		int result = jdbcTemplate.update(sql,
 				form.getStaff_code(),
@@ -93,18 +112,20 @@ public class UserDaoImpl implements UserDao {
 				form.getLast_name_romaji(),
 				form.getFirst_name_romaji(),
 				form.getStaff_department(),
-				form.getProject_type(),
+				projectType,
 				form.getJoined_year(),
-				form.getCarrer_type(),
+				form.isNew_glad_flg(),
+				USER_NAME,
+				nowTime,
 				form.getId()
 				);
 		return result;
 	}
 
 	@Override
-	public int deleteUser(int id) throws Exception {
-		String sql = "DELETE FROM staffs WHERE id = ?";
-		int result = jdbcTemplate.update(sql, id);
+	public int deleteUser(String staffCode) throws Exception {
+		String sql = "DELETE FROM staffs WHERE staff_code = ?";
+		int result = jdbcTemplate.update(sql, staffCode);
 		return result;
 	}
 	
@@ -118,11 +139,19 @@ public class UserDaoImpl implements UserDao {
 		user.setLast_name_romaji((String)map.get("last_name_romaji"));
 		user.setFirst_name_romaji((String)map.get("first_name_romaji"));
 		user.setStaff_department((String)map.get("staff_department"));
-		user.setProject_type((String)map.get("project_type"));
+		String projectType = (String)map.get("project_type");
+		if(StringUtils.isEmpty(projectType))
+			projectType = "ー";
+		user.setProject_type(projectType);
 		user.setJoined_year((String)map.get("joined_year"));
-		user.setCarrer_type((String)map.get("carrer_type"));
+		user.setNew_glad_flg((Boolean)map.get("new_glad_flg"));
 
 		return user;
+	}
+	private Timestamp getNowTime() {
+		long millis = System.currentTimeMillis();
+	    Timestamp timestamp = new Timestamp(millis);
+		return timestamp;
 	}
 
 }

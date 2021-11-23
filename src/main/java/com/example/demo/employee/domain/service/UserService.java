@@ -46,8 +46,8 @@ public class UserService {
 		return resultNum > 0 ? true : false;
 	}
 	/** ユーザー情報を削除 */
-	public boolean deleteUser(int id) throws Exception{
-		int resultNum = dao.deleteUser(id);
+	public boolean deleteUser(String staffCode) throws Exception{
+		int resultNum = dao.deleteUser(staffCode);
 		return resultNum > 0 ? true : false;
 	}
 }

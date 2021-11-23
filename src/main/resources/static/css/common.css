@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+table {
+	border-collapse: collapse;
+}
+table th, table td {
+	border: solid 1px;
+}
+table.edit td{
+	border: none !important;
+}
+table td#title{
+	text-align: right;
+}
+span#require {
+	color: #ff0000;
+}
+.error {
+	border: 2px solid red;
+}

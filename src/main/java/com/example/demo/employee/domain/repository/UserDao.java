@@ -18,5 +18,5 @@ public interface UserDao {
 	/** ユーザー情報を更新 */
 	public int updateUser(UserForm form) throws Exception;
 	/** ユーザー情報を削除 */
-	public int deleteUser(int id) throws Exception;
+	public int deleteUser(String staffCode) throws Exception;
 }

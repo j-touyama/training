@@ -3,7 +3,8 @@ package com.example.demo.employee.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.employee.domain.model.UserList;
 import com.example.demo.employee.domain.service.UserService;
@@ -14,11 +15,10 @@ public class EmployeeController {
 	@Autowired
 	private UserService service;
 
-	@GetMapping("employee")
-	public String getEmployee(Model model) {
+	@RequestMapping(value="employee", method=RequestMethod.GET)
+	public String index(Model model) {
 		// 画面初期表示処理
 		initDisplay(model);
-
 		return "/employee/index";
 	}
 

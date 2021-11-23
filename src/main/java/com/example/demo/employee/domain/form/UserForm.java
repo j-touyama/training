@@ -29,15 +29,13 @@ public class UserForm {
 	@NotEmpty(groups={ValidGroup1.class},message="名(ローマ字)を入力してください。")
 	@Pattern(regexp = "^[a-zA-Z0-9]*$", groups={ValidGroup2.class},message="半角英数字で入力してください。")
 	private String first_name_romaji;
-	private String staff_photo_url;
 	@NotEmpty(groups={ValidGroup1.class},message="部署コードを選択してください。")
 	private String staff_department;
 	private String project_type;
 	@NotEmpty(groups={ValidGroup1.class}, message="日付を入力してください。")
 	@Pattern(regexp = "^[0-9]{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$", groups={ValidGroup2.class},message="yyyy/MM/dd形式で入力してください。")
 	private String joined_year;
-	@NotEmpty(groups={ValidGroup1.class},message="経歴を選択してください。")
-	private String carrer_type;
+	private boolean new_glad_flg=true;
 
 	private Map<String, String> departmentMap = new LinkedHashMap<>();
 	
@@ -83,12 +81,6 @@ public class UserForm {
 	public void setFirst_name_romaji(String first_name_romaji) {
 		this.first_name_romaji = first_name_romaji;
 	}
-	public String getStaff_photo_url() {
-		return staff_photo_url;
-	}
-	public void setStaff_photo_url(String staff_photo_url) {
-		this.staff_photo_url = staff_photo_url;
-	}
 	public String getStaff_department() {
 		return staff_department;
 	}
@@ -107,12 +99,15 @@ public class UserForm {
 	public void setJoined_year(String joined_year) {
 		this.joined_year = joined_year;
 	}
-	public String getCarrer_type() {
-		return carrer_type;
+
+	public boolean isNew_glad_flg() {
+		return new_glad_flg;
 	}
-	public void setCarrer_type(String carrer_type) {
-		this.carrer_type = carrer_type;
+
+	public void setNew_glad_flg(boolean new_glad_flg) {
+		this.new_glad_flg = new_glad_flg;
 	}
+
 	public Map<String, String> getDepartmentMap() {
 		return departmentMap;
 	}

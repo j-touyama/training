@@ -17,7 +17,7 @@ public class User {
 	private String staff_department;
 	private String project_type;
 	private String joined_year;
-	private String carrer_type;
+	private boolean new_glad_flg=true;
 	private Map<String, String> departmentMap = new LinkedHashMap<>();
 	
 	public User() {
@@ -80,14 +80,17 @@ public class User {
 	public void setJoined_year(String joined_year) {
 		this.joined_year = joined_year;
 	}
-	public String getCarrer_type() {
-		return carrer_type;
-	}
-	public void setCarrer_type(String carrer_type) {
-		this.carrer_type = carrer_type;
-	}
 
 	public Map<String, String> getDepartmentMap() {
 		return departmentMap;
 	}
+
+	public boolean isNew_glad_flg() {
+		return new_glad_flg;
+	}
+
+	public void setNew_glad_flg(boolean new_glad_flg) {
+		this.new_glad_flg = new_glad_flg;
+	}
+
 }
