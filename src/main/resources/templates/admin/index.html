@@ -22,10 +22,10 @@
 	<span th:text="${member.id}">1</span>
 		<input type="hidden" th:id="'id_' + ${member.id}" th:value="${member.id}" />
 	</td>
-	<td><span th:text="${member.staff_code}">0001</span></td>
-	<td><span th:text="${member.last_name} + ' ' + ${member.first_name}">山田太郎</span></td>
-	<td><span th:text="${member.last_name_romaji} + ' ' + ${member.first_name_romaji}">yamada taro</span></td>
-	<td><span th:text="${member.joined_year}">2000-01-01</span></td>
+	<td><span th:text="${member.staffCode}">0001</span></td>
+	<td><span th:text="${member.lastName} + ' ' + ${member.firstName}">山田太郎</span></td>
+	<td><span th:text="${member.lastNameRomaji} + ' ' + ${member.firstNameRomaji}">yamada taro</span></td>
+	<td><span th:text="${member.joinedYear}">2000-01-01</span></td>
 	<td>
 		<input type="submit" name="update" th:value="編集" th:attr="onclick='selectedId(document.getElementById(\'id_' + ${member.id} + '\').value);'" />
 	</td>
