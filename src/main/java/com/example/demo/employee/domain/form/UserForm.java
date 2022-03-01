@@ -16,26 +16,31 @@ public class UserForm {
 
 	private String id;
 	@NotEmpty(groups={ValidGroup1.class},message="社員コードを入力してください。")
-	@Pattern(regexp = "^[0-9]*$", groups={ValidGroup2.class},message="数値で入力してください。")
-	@Length(max=4, groups={ValidGroup3.class},message="4文字以下で入力してください。")
-	private String staff_code;
+	@Pattern(regexp = "^[0-9]*$", groups={ValidGroup2.class},message="社員コードは半角数値で入力してください。")
+	@Length(min=4, max=4, groups={ValidGroup3.class},message="社員コードは4文字で入力してください。")
+	private String staffCode;
 	@NotEmpty(groups={ValidGroup1.class},message="姓を入力してください。")
-	private String last_name;
+	@Length(max=20, groups={ValidGroup2.class},message="姓は20文字以下で入力して下さい。")
+	private String lastName;
 	@NotEmpty(groups={ValidGroup1.class},message="名を入力してください。")
-	private String first_name;
-	@NotEmpty(groups={ValidGroup1.class},message="姓(ローマ字)を入力してください。")
-	@Pattern(regexp = "^[a-zA-Z0-9]*$", groups={ValidGroup2.class},message="半角英数字で入力してください。")
-	private String last_name_romaji;
-	@NotEmpty(groups={ValidGroup1.class},message="名(ローマ字)を入力してください。")
-	@Pattern(regexp = "^[a-zA-Z0-9]*$", groups={ValidGroup2.class},message="半角英数字で入力してください。")
-	private String first_name_romaji;
-	@NotEmpty(groups={ValidGroup1.class},message="部署コードを選択してください。")
-	private String staff_department;
-	private String project_type;
-	@NotEmpty(groups={ValidGroup1.class}, message="日付を入力してください。")
-	@Pattern(regexp = "^[0-9]{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$", groups={ValidGroup2.class},message="yyyy/MM/dd形式で入力してください。")
-	private String joined_year;
-	private boolean new_glad_flg=true;
+	@Length(max=20, groups={ValidGroup2.class},message="名は20文字以下で入力して下さい。")
+	private String firstName;
+	@NotEmpty(groups={ValidGroup1.class},message="姓_ローマ字を入力してください。")
+	@Pattern(regexp = "^[a-zA-Z0-9]*$", groups={ValidGroup2.class},message="姓_ローマ字は半角英数字で入力して下さい。")
+	@Length(max=40, groups={ValidGroup2.class},message="姓_ローマ字は40文字以下で入力して下さい。")
+	private String lastNameRomaji;
+	@NotEmpty(groups={ValidGroup1.class},message="名_ローマ字を入力してください。")
+	@Pattern(regexp = "^[a-zA-Z0-9]*$", groups={ValidGroup2.class},message="名_ローマ字は半角英数字で入力して下さい。")
+	@Length(max=40, groups={ValidGroup2.class},message="名_ローマ字は40文字以下で入力して下さい。")
+	private String firstNameRomaji;
+	@NotEmpty(groups={ValidGroup1.class},message="所属を選択して下さい。")
+	@Length(max=100, groups={ValidGroup1.class},message="案件は100文字以下で入力して下さい。")
+	private String staffDepartment;
+	private String projectType;
+	@NotEmpty(groups={ValidGroup1.class}, message="入社年を入力して下さい。")
+	@Pattern(regexp = "^[0-9]{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$", groups={ValidGroup2.class},message="入社年は「yyyy/MM/dd」の形式で入力して下さい。")
+	private String joinedYear;
+	private boolean newGladFlg=true;
 
 	private Map<String, String> departmentMap = new LinkedHashMap<>();
 	
@@ -45,70 +50,92 @@ public class UserForm {
 		departmentMap.put("0003", "コーポレート");
 	}
 
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getStaff_code() {
-		return staff_code;
-	}
-	public void setStaff_code(String staff_code) {
-		this.staff_code = staff_code;
-	}
-	public String getLast_name() {
-		return last_name;
-	}
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
-	}
-	public String getFirst_name() {
-		return first_name;
-	}
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
-	}
-	public String getLast_name_romaji() {
-		return last_name_romaji;
-	}
-	public void setLast_name_romaji(String last_name_romaji) {
-		this.last_name_romaji = last_name_romaji;
-	}
-	public String getFirst_name_romaji() {
-		return first_name_romaji;
-	}
-	public void setFirst_name_romaji(String first_name_romaji) {
-		this.first_name_romaji = first_name_romaji;
-	}
-	public String getStaff_department() {
-		return staff_department;
-	}
-	public void setStaff_department(String staff_department) {
-		this.staff_department = staff_department;
-	}
-	public String getProject_type() {
-		return project_type;
-	}
-	public void setProject_type(String project_type) {
-		this.project_type = project_type;
-	}
-	public String getJoined_year() {
-		return joined_year;
-	}
-	public void setJoined_year(String joined_year) {
-		this.joined_year = joined_year;
-	}
-
-	public boolean isNew_glad_flg() {
-		return new_glad_flg;
-	}
-
-	public void setNew_glad_flg(boolean new_glad_flg) {
-		this.new_glad_flg = new_glad_flg;
-	}
-
 	public Map<String, String> getDepartmentMap() {
 		return departmentMap;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getStaffCode() {
+		return staffCode;
+	}
+
+	public void setStaffCode(String staffCode) {
+		this.staffCode = staffCode;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastNameRomaji() {
+		return lastNameRomaji;
+	}
+
+	public void setLastNameRomaji(String lastNameRomaji) {
+		this.lastNameRomaji = lastNameRomaji;
+	}
+
+	public String getFirstNameRomaji() {
+		return firstNameRomaji;
+	}
+
+	public void setFirstNameRomaji(String firstNameRomaji) {
+		this.firstNameRomaji = firstNameRomaji;
+	}
+
+	public String getStaffDepartment() {
+		return staffDepartment;
+	}
+
+	public void setStaffDepartment(String staffDepartment) {
+		this.staffDepartment = staffDepartment;
+	}
+
+	public String getProjectType() {
+		return projectType;
+	}
+
+	public void setProjectType(String projectType) {
+		this.projectType = projectType;
+	}
+
+	public String getJoinedYear() {
+		return joinedYear;
+	}
+
+	public void setJoinedYear(String joinedYear) {
+		this.joinedYear = joinedYear;
+	}
+
+	public boolean isNewGladFlg() {
+		return newGladFlg;
+	}
+
+	public void setNewGladFlg(boolean newGladFlg) {
+		this.newGladFlg = newGladFlg;
+	}
+
+	public void setDepartmentMap(Map<String, String> departmentMap) {
+		this.departmentMap = departmentMap;
+	}
+
 }
