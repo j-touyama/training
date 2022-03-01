@@ -11,30 +11,38 @@ import com.example.demo.employee.domain.service.UserService;
 
 @Controller
 public class EmployeeController {
-	
+
 	@Autowired
 	private UserService service;
 
+	/**
+	 * 初期表示
+	 * @param model
+	 */
 	@RequestMapping(value="employee", method=RequestMethod.GET)
 	public String index(Model model) {
-		// 画面初期表示処理
-		initDisplay(model);
-		return "/employee/index";
+		try {
+			// 画面初期表示処理
+			initDisplay(model);
+			return "/employee/index";
+		} catch(Exception e) {
+			e.printStackTrace();
+			return "/error/index";
+		}
 	}
 
-	private void initDisplay(Model model) {
+	/**
+	 * 部署ごとのメンバーを取得
+	 * @param model
+	 */
+	private void initDisplay(Model model) throws Exception {
 		UserList list = new UserList();
-		try {
-			// エンジニアの一覧を取得。
-			list.setEngineer(service.selectedDpt("0001"));
-			// 営業担当の一覧を取得。
-			list.setSales(service.selectedDpt("0002"));
-			// コーポレートの一覧を取得。
-			list.setCorporate(service.selectedDpt("0003"));
-			model.addAttribute("member", list);
-		} catch (Exception e) {
-			// TODO エラー画面作成して飛ばしたい。
-			e.printStackTrace();
-		}
+		// エンジニアの一覧を取得。
+		list.setEngineer(service.selectedDpt("0001"));
+		// 営業担当の一覧を取得。
+		list.setSales(service.selectedDpt("0002"));
+		// コーポレートの一覧を取得。
+		list.setCorporate(service.selectedDpt("0003"));
+		model.addAttribute("member", list);
 	}
 }
