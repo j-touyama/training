@@ -21,7 +21,7 @@ public class EmployeeAdminController {
 
 	@Autowired
 	private UserService service;
-	
+
 	/**
 	 * 社員情報管理画面初期表示処理
 	 * @param model
@@ -34,7 +34,6 @@ public class EmployeeAdminController {
 			initDisplay(model);
 			return "/admin/index";
 		} catch (Exception e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 			return "employee";
 		}
@@ -42,7 +41,6 @@ public class EmployeeAdminController {
 
 	/**
 	 * 戻るボタン押下時の処理
-	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value="/edit", params="back", method=RequestMethod.POST)
@@ -56,7 +54,7 @@ public class EmployeeAdminController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/edit", params="insert", method= RequestMethod.POST)
+	@RequestMapping(value="/edit", params="insert", method={RequestMethod.POST, RequestMethod.GET})
 	public String insert(@ModelAttribute("form") UserForm form, Model model) {
 		model.addAttribute("form", new User());
 		return "/admin/insert";
@@ -68,7 +66,7 @@ public class EmployeeAdminController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/edit", params="update", method= RequestMethod.POST)
+	@RequestMapping(value="/edit", params="update", method={RequestMethod.POST, RequestMethod.GET})
 	public String update(@ModelAttribute("form") UserForm form, Model model) {
 		try {
 			// idに紐づくユーザー情報取得
@@ -87,7 +85,7 @@ public class EmployeeAdminController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/edit", params="delete", method= RequestMethod.POST)
+	@RequestMapping(value="/edit", params="delete", method={RequestMethod.POST, RequestMethod.GET})
 	public String delete(@RequestParam("id") String id, Model model) {
 		try {
 			// idに紐づくユーザー情報取得
@@ -101,7 +99,16 @@ public class EmployeeAdminController {
 	}
 
 	/**
-	 * 初期表示処理
+	 * URLを直叩きした時の処理
+	 * @return
+	 */
+	@RequestMapping(value="/edit", method=RequestMethod.GET)
+	public String getMapping() {
+		return "redirect:/employee";
+	}
+
+	/**
+	 * 初期処理
 	 * @param model
 	 * @throws Exception
 	 */
@@ -121,10 +128,10 @@ public class EmployeeAdminController {
 	private void getUserInfo(Model model, String id) throws Exception {
 		// idに紐づく社員情報を取得
 		User user = service.selectedId(id);
-		String projectType = user.getProject_type();
+		String projectType = user.getProjectType();
 		// <br>要素は改行コードに変換してテキストエリアに表示する。
 		if(projectType != null && !projectType.isEmpty())
-			user.setProject_type(projectType.replaceAll("<br>", "\r\n"));
+			user.setProjectType(projectType.replaceAll("<br>", "\r\n"));
 
 		model.addAttribute("form", user);
 	}
