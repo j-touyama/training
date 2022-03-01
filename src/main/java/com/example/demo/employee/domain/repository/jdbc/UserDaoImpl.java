@@ -67,7 +67,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int insertUser(UserForm form) throws Exception {
 		Timestamp nowTime = getNowTime();
-		String projectType = form.getProject_type();
+		String projectType = form.getProjectType();
 		// 改行コードは<br>要素に変換して登録する。
 		if(projectType != null && !projectType.isEmpty())
 			projectType = projectType.replaceAll("\r\n", "<br>");
@@ -76,15 +76,15 @@ public class UserDaoImpl implements UserDao {
 				+ " staff_department, project_type, joined_year, new_glad_flg, created_by, updated_by, created_at, updated_at)"
 				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int result = jdbcTemplate.update(sql,
-				form.getStaff_code(),
-				form.getLast_name(),
-				form.getFirst_name(),
-				form.getLast_name_romaji(),
-				form.getFirst_name_romaji(),
-				form.getStaff_department(),
+				form.getStaffCode(),
+				form.getLastName(),
+				form.getFirstName(),
+				form.getLastNameRomaji(),
+				form.getFirstNameRomaji(),
+				form.getStaffDepartment(),
 				projectType,
-				form.getJoined_year(),
-				form.isNew_glad_flg(),
+				form.getJoinedYear(),
+				form.isNewGladFlg(),
 				USER_NAME,
 				USER_NAME,
 				nowTime,
@@ -96,7 +96,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int updateUser(UserForm form) throws Exception {
 		Timestamp nowTime = getNowTime();
-		String projectType = form.getProject_type();
+		String projectType = form.getProjectType();
 		// 改行コードは<br>要素に変換して登録する。
 		if(projectType != null && !projectType.isEmpty())
 			projectType = projectType.replaceAll("\r\n", "<br>");
@@ -106,15 +106,15 @@ public class UserDaoImpl implements UserDao {
 				+ " updated_by = ?, updated_at = ?"
 				+ " WHERE id = ?";
 		int result = jdbcTemplate.update(sql,
-				form.getStaff_code(),
-				form.getLast_name(),
-				form.getFirst_name(),
-				form.getLast_name_romaji(),
-				form.getFirst_name_romaji(),
-				form.getStaff_department(),
+				form.getStaffCode(),
+				form.getLastName(),
+				form.getFirstName(),
+				form.getLastNameRomaji(),
+				form.getFirstNameRomaji(),
+				form.getStaffDepartment(),
 				projectType,
-				form.getJoined_year(),
-				form.isNew_glad_flg(),
+				form.getJoinedYear(),
+				form.isNewGladFlg(),
 				USER_NAME,
 				nowTime,
 				form.getId()
@@ -133,18 +133,18 @@ public class UserDaoImpl implements UserDao {
 
 		User user = new User();
 		user.setId((long)map.get("id"));
-		user.setStaff_code((String)map.get("staff_code"));
-		user.setLast_name((String)map.get("last_name"));
-		user.setFirst_name((String)map.get("first_name"));
-		user.setLast_name_romaji((String)map.get("last_name_romaji"));
-		user.setFirst_name_romaji((String)map.get("first_name_romaji"));
-		user.setStaff_department((String)map.get("staff_department"));
+		user.setStaffCode((String)map.get("staff_code"));
+		user.setLastName((String)map.get("last_name"));
+		user.setFirstName((String)map.get("first_name"));
+		user.setLastNameRomaji((String)map.get("last_name_romaji"));
+		user.setFirstNameRomaji((String)map.get("first_name_romaji"));
+		user.setStaffDepartment((String)map.get("staff_department"));
 		String projectType = (String)map.get("project_type");
 		if(StringUtils.isEmpty(projectType))
 			projectType = "ー";
-		user.setProject_type(projectType);
-		user.setJoined_year((String)map.get("joined_year"));
-		user.setNew_glad_flg((Boolean)map.get("new_glad_flg"));
+		user.setProjectType(projectType);
+		user.setJoinedYear((String)map.get("joined_year"));
+		user.setNewGladFlg((boolean) map.get("new_glad_flg"));
 
 		return user;
 	}
