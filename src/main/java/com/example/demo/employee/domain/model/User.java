@@ -9,28 +9,6 @@ import org.springframework.stereotype.Component;
 public class User {
 
 	private long id;
-	private String staff_code;
-	private String last_name;
-	private String first_name;
-	private String last_name_romaji;
-	private String first_name_romaji;
-	private String staff_department;
-	private String project_type;
-	private String joined_year;
-	private boolean new_glad_flg=true;
-	private Map<String, String> departmentMap = new LinkedHashMap<>();
-	
-package com.example.demo.employee.domain.model;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import org.springframework.stereotype.Component;
-
-@Component
-public class User {
-
-	private long id;
 	private String staffCode;
 	private String lastName;
 	private String firstName;
