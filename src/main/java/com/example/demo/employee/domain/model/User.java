@@ -20,77 +20,119 @@ public class User {
 	private boolean new_glad_flg=true;
 	private Map<String, String> departmentMap = new LinkedHashMap<>();
 	
+package com.example.demo.employee.domain.model;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class User {
+
+	private long id;
+	private String staffCode;
+	private String lastName;
+	private String firstName;
+	private String lastNameRomaji;
+	private String firstNameRomaji;
+	private String staffDepartment;
+	private String projectType;
+	private String joinedYear;
+	private boolean newGladFlg = true;
+	private Map<String, String> departmentMap = new LinkedHashMap<>();
+	
 	public User() {
 		departmentMap.put("0001", "エンジニア");
 		departmentMap.put("0002", "営業");
 		departmentMap.put("0003", "コーポレート");
 	}
 
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getStaff_code() {
-		return staff_code;
-	}
-	public void setStaff_code(String staff_code) {
-		this.staff_code = staff_code;
-	}
-	public String getLast_name() {
-		return last_name;
-	}
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
-	}
-	public String getFirst_name() {
-		return first_name;
-	}
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
-	}
-	public String getLast_name_romaji() {
-		return last_name_romaji;
-	}
-	public void setLast_name_romaji(String last_name_romaji) {
-		this.last_name_romaji = last_name_romaji;
-	}
-	public String getFirst_name_romaji() {
-		return first_name_romaji;
-	}
-	public void setFirst_name_romaji(String first_name_romaji) {
-		this.first_name_romaji = first_name_romaji;
-	}
-	public String getStaff_department() {
-		return staff_department;
-	}
-	public void setStaff_department(String staff_department) {
-		this.staff_department = staff_department;
-	}
-	public String getProject_type() {
-		return project_type;
-	}
-	public void setProject_type(String project_type) {
-		this.project_type = project_type;
-	}
-	public String getJoined_year() {
-		return joined_year;
-	}
-	public void setJoined_year(String joined_year) {
-		this.joined_year = joined_year;
-	}
-
 	public Map<String, String> getDepartmentMap() {
 		return departmentMap;
 	}
 
-	public boolean isNew_glad_flg() {
-		return new_glad_flg;
+	public long getId() {
+		return id;
 	}
 
-	public void setNew_glad_flg(boolean new_glad_flg) {
-		this.new_glad_flg = new_glad_flg;
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getStaffCode() {
+		return staffCode;
+	}
+
+	public void setStaffCode(String staffCode) {
+		this.staffCode = staffCode;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastNameRomaji() {
+		return lastNameRomaji;
+	}
+
+	public void setLastNameRomaji(String lastNameRomaji) {
+		this.lastNameRomaji = lastNameRomaji;
+	}
+
+	public String getFirstNameRomaji() {
+		return firstNameRomaji;
+	}
+
+	public void setFirstNameRomaji(String firstNameRomaji) {
+		this.firstNameRomaji = firstNameRomaji;
+	}
+
+	public String getStaffDepartment() {
+		return staffDepartment;
+	}
+
+	public void setStaffDepartment(String staffDepartment) {
+		this.staffDepartment = staffDepartment;
+	}
+
+	public String getProjectType() {
+		return projectType;
+	}
+
+	public void setProjectType(String projectType) {
+		this.projectType = projectType;
+	}
+
+	public String getJoinedYear() {
+		return joinedYear;
+	}
+
+	public void setJoinedYear(String joinedYear) {
+		this.joinedYear = joinedYear;
+	}
+	public boolean isNewGladFlg() {
+		return newGladFlg;
+	}
+
+	public void setNewGladFlg(boolean newGladFlg) {
+		this.newGladFlg = newGladFlg;
+	}
+
+	public void setDepartmentMap(Map<String, String> departmentMap) {
+		this.departmentMap = departmentMap;
 	}
 
 }
