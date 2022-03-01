@@ -15,11 +15,11 @@
 </tr>
 <tr th:each="member, index : ${members}" style="list-style: none;">
 	<td th:text="${index.count}">1</td>
-	<td th:text="${member.last_name} + ' ' + ${member.first_name}">山田太郎</td>
-	<td th:text="${member.joined_year}">2000-01-01</td>
-	<td th:if="${member.new_glad_flg}" th:text="新卒">新卒</td>
-	<td th:unless="${member.new_glad_flg}" th:text="中途">中途</td>
-	<td th:utext="${member.project_type}">Javaフロントエンドの開発</td>
+	<td th:text="${member.lastName} + ' ' + ${member.firstName}">山田太郎</td>
+	<td th:text="${member.joinedYear}">2000-01-01</td>
+ 	<td th:if="${member.newGladFlg == 0}" th:text="新卒">新卒</td>
+	<td th:unless="${member.newGladFlg == 0}" th:text="中途">中途</td>
+	<td th:utext="${member.projectType}">Javaフロントエンドの開発</td>
 </tr>
 </table>
 </div>
